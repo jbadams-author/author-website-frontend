@@ -1,0 +1,14 @@
+div.ws_header {
+  background-color: #746508;
+  border-color: #FF8300;
+}
+
+a.ws_header_sitelinks:hover {
+  color: #FF8300;
+}
+
+a.ws_footer_sitelinks:hover {
+  color: #FF8300;
+}
+
+/* background-color: #A38D1C; */
