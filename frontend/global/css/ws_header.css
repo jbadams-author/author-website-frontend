@@ -1,0 +1,54 @@
+div.ws_header {
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  border-width: 0 0 3px 0;
+  border-style: solid;
+  z-index: 1000;
+}
+
+img.ws_header {
+  height: 3.0em;
+  width: 3.0em;
+  margin: 0.25em 0.5em 0 1.0em;
+}
+
+ul.ws_header_sitelinks {
+  list-style: none;
+  list-style-type: none;
+  overflow: hidden;
+  text-align: right;
+  padding: 0;
+  display: inline;
+}
+
+li.ws_header_sitelinks {
+  /* float: center; */
+  /*display: inline-block;*/
+  display: inline;
+  color: white;
+  font-family: "Simplifica";
+  font-size: 1.5em;
+  padding-right:0.75em;
+  padding-left: 0.75em;
+  text-align: right;
+}
+
+li.ws_header_sitelinks,
+a.ws_header_sitelinks {
+  text-decoration: none;
+}
+
+a.ws_header_sitelinks:visited {
+  color: white;
+}
+
+h1.ws_header {
+  font-family: 'Bebas';
+  color: white;
+  text-align: left;
+  font-size: 2.0em;
+  margin: 0 1.0em 0 1.0em;
+  word-spacing: 0.25em;
+  display: inline;
+}

@@ -1,0 +1,93 @@
+<div class="article_index_frame" id="article_index_frame_div">
+  <div class="article_index_body" id="article_index_body_div">
+    <table class="article_index" id="article_index_table">
+      <tr class="article_index" id="article_index_tr">
+      </tr>
+    </table>
+  </div>
+</div>
+
+<script "text/javascript">
+  function parseJSON(jsonObj) {
+    let tableTypes = ["pseudonym","series","palette","article"];
+    let newMap = new Map();
+
+    for (let i=0; i<tableTypes.length; i++) {
+      newMap[tableTypes[i]] = [];
+    }
+
+    for (let i=0; i<jsonObj.length; i++) {
+      //alert(jsonObj[i].model.split(".")[1]);
+      newMap[jsonObj[i].model.split(".")[1]].push(jsonObj[i])
+    }
+
+    return newMap;
+  }
+
+  let xhr = new XMLHttpRequest();
+  xhr.open('POST', '/static/json/articles.json');
+  xhr.send(null);
+
+  xhr.onreadystatechange = function () {
+  let DONE = 4; // readyState 4 means the request is done.
+  let OK = 200; // status 200 is a successful return.
+  if (xhr.readyState === DONE) {
+    if (xhr.status === OK)
+      console.log(xhr.responseText); // 'This is the returned text.'
+
+      let jsonObj = JSON.parse(xhr.responseText);
+      let parsedJsonObj = parseJSON(jsonObj);
+
+      //alert(parsedJsonObj["article"]);
+      for (let i=0; i<parsedJsonObj["article"].length; i++) {
+        let c = String(i+1);
+        let title = parsedJsonObj["article"][i].fields.title;
+        let urlstring = parsedJsonObj["article"][i].fields.url_string;
+        let imgPath = `/static/articles/img/${urlstring}.jpg`;
+        let aPath = `/articles/${urlstring}`;
+
+
+        let tr = document.getElementById("article_index_tr");
+        let td = document.createElement("td");
+        let p = document.createElement("p");
+        let a = document.createElement("a");
+        a.setAttribute('href', aPath);
+        let text = document.createTextNode(c);
+        p.appendChild(text);
+        td.classList.add("article_index_td");
+        td.style["background-image"] = `url(${imgPath})`;
+        td.appendChild(p);
+        //td.appendChild(a);
+        td.onmouseover = function() {
+          td.style["background-image"] = `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(${imgPath})`;
+          //td.style["background-image"] = `linear-gradient(black, black)`;
+        };
+        td.onmouseout = function() {
+          td.style["background-image"] = `url(${imgPath})`;
+        }
+        td.onclick = function() { location.href = urlstring; };
+        tr.appendChild(td);
+
+
+
+
+        /* //SIMPLE EXAMPLE OUTPUT IMAGE PATH IN P ELEMENT
+        let div = document.getElementById("article_index_body_div");
+        let p = document.createElement("p");
+        let text = document.createTextNode(imgPath);
+        p.appendChild(text);
+        div.appendChild(p);
+        */
+
+
+
+        //alert(parsedJsonObj["article"][i].fields.title);
+      }
+
+      alert(xhr.responseText);
+
+    } else {
+      console.log('Error: ' + xhr.status); // An error occurred during the request.
+    }
+  };
+</script>
