@@ -25,7 +25,7 @@
   }
 
   let xhr = new XMLHttpRequest();
-  xhr.open('POST', '/static/json/articles.json');
+  xhr.open('GET', '/static/json/articles.json');
   xhr.send(null);
 
   xhr.onreadystatechange = function () {
@@ -70,7 +70,7 @@
 
         }
 
-        alert(xhr.responseText);
+        //alert(xhr.responseText);
 
       } else {
         console.log('Error: ' + xhr.status); // An error occurred during the request.
