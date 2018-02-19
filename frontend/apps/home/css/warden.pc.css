@@ -3,6 +3,10 @@ div.ws_header {
   border-color: #FFBF00;
 }
 
+div.ws_footer {
+  border-color: #FFBF00;
+}
+
 a.ws_header_sitelinks:hover {
   color: #FFBF00;
 }
