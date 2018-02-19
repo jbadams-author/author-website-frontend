@@ -1,8 +1,6 @@
 <div class="article_index_frame" id="article_index_frame_div">
   <div class="article_index_body" id="article_index_body_div">
-    <table class="article_index" id="article_index_table">
-      <tr class="article_index" id="article_index_tr">
-      </tr>
+    <table class="article_index_table" id="article_index_table">
     </table>
   </div>
 </div>
@@ -18,10 +16,19 @@
 
     for (let i=0; i<jsonObj.length; i++) {
       //alert(jsonObj[i].model.split(".")[1]);
-      newMap[jsonObj[i].model.split(".")[1]].push(jsonObj[i])
+      newMap[jsonObj[i].model.split(".")[1]].push(jsonObj[i]);
     }
 
     return newMap;
+  }
+
+  function sortArticlesByDate(articles) {
+    function compareDate(a,b) {
+      if (a.fields.pub_date > b.fields.pub_date) return 1;
+      if (a.fields.pub_date == b.fields.pub_date) return 0;
+      if (a.fields.pub_date < b.fields.pub_date) return -1;
+    }
+    articles.sort(compareDate);
   }
 
   let xhr = new XMLHttpRequest();
@@ -31,44 +38,71 @@
   xhr.onreadystatechange = function () {
     let DONE = 4; // readyState 4 means the request is done.
     let OK = 200; // status 200 is a successful return.
+
+    let cellsPerRow = 3;
+    let cellIdx = 1;
+    let rowNumber = 1;
+    let table = document.getElementById("article_index_table");
+    let tr = document.createElement("tr");
+    tr.classList.add("article_index");
+
     if (xhr.readyState === DONE) {
       if (xhr.status === OK) {
         console.log(xhr.responseText); // 'This is the returned text.'
 
         let jsonObj = JSON.parse(xhr.responseText);
         let parsedJsonObj = parseJSON(jsonObj);
+        sortArticlesByDate(parsedJsonObj["article"]);
 
         //alert(parsedJsonObj["article"]);
         for (let i=0; i<parsedJsonObj["article"].length; i++) {
           let c = String(i+1);
           let title = parsedJsonObj["article"][i].fields.title;
           let urlstring = parsedJsonObj["article"][i].fields.url_string;
+          let pubdate = parsedJsonObj["article"][i].fields.pub_date;
+
           let imgPath = `/static/articles/img/${urlstring}.jpg`;
           let aPath = `/articles/${urlstring}`;
 
-
-          let tr = document.getElementById("article_index_tr");
           let td = document.createElement("td");
-          let p = document.createElement("p");
+          //let p = document.createElement("p");
           let a = document.createElement("a");
+          let p;
+          let text;
           a.setAttribute('href', aPath);
-          let text = document.createTextNode(c);
-          p.appendChild(text);
+          //let text = document.createTextNode(`${c} ${title}`);
+          //p.appendChild(text);
+          //p.classList.add("text");
           td.classList.add("article_index_td");
           td.style["background-image"] = `url(${imgPath})`;
-          td.appendChild(p);
+          //td.appendChild(p);
           //td.appendChild(a);
-          td.onmouseover = function() {
+          td.onmouseenter = function() {
             td.style["background-image"] = `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(${imgPath})`;
-            //td.style["background-image"] = `linear-gradient(black, black)`;
+            p = document.createElement("p");
+            text = document.createTextNode(title);
+            p.appendChild(text);
+            p.classList.add("text");
+            td.appendChild(p);
+
           };
-          td.onmouseout = function() {
+          td.onmouseleave = function() {
             td.style["background-image"] = `url(${imgPath})`;
+            td.removeChild(p);
           };
+
           td.onclick = function() { location.href = urlstring; };
           tr.appendChild(td);
 
+          if (cellIdx % cellsPerRow == 0) {
+              table.appendChild(tr);
+              tr = document.createElement("tr");
+          }
+          cellIdx += 1;
+
         }
+        table.appendChild(tr);
+
 
         //alert(xhr.responseText);
 

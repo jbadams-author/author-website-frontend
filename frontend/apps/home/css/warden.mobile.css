@@ -7,22 +7,14 @@ div.ws_footer {
   border-color: #FFBF00;
 }
 
+li.ws_header_sitelinks {
+  border-color: #FFBF00;
+}
+
 a.ws_header_sitelinks:hover {
   color: #FFBF00;
 }
 
 a.ws_footer_sitelinks:hover {
   color: #FFBF00;
-}
-
-div.article_banner_image {
-  border-color: #FFBF00;
-}
-
-div.article_body {
-  border-color: #FFBF00;
-}
-
-div.article_index_body {
-  border-color: #FFBF00;
 }

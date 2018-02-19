@@ -5,6 +5,8 @@ div.ws_footer {
   padding-top: 10px;
   position:absolute;
   box-sizing: border-box;
+  border-width: 3px 0 0 0;
+  border-style: solid;
 }
 
 div.ws_footer_social_media {
@@ -96,6 +98,7 @@ li.ws_footer_sitelinks,
 a.ws_footer_sitelinks {
   text-align: center;
   text-decoration: none;
+  color: white;
 }
 
 a.ws_footer_sitelinks:visited {

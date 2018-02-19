@@ -23,8 +23,6 @@ ul.ws_header_sitelinks {
 }
 
 li.ws_header_sitelinks {
-  /* float: center; */
-  /*display: inline-block;*/
   display: inline;
   color: white;
   font-family: "Simplifica";
@@ -37,6 +35,7 @@ li.ws_header_sitelinks {
 li.ws_header_sitelinks,
 a.ws_header_sitelinks {
   text-decoration: none;
+  color: white;
 }
 
 a.ws_header_sitelinks:visited {
