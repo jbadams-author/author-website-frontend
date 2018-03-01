@@ -1,16 +1,24 @@
 div.ws_header {
+  /*height:8%;*/
   width: 100%;
-  position: relative;
+  /*position: relative;*/
+  position: fixed;
   box-sizing: border-box;
   border-width: 0 0 3px 0;
   border-style: solid;
   z-index: 1000;
 }
 
+div.ws_header_top_row {
+  height:8.0vh;
+}
+
 img.ws_header {
   height: 5.0em;
   width: 5.0em;
   padding-right: 5%;
+  padding-left: 1%;
+  padding-top: 1%;
   text-align: center;
   display: inline;
 }

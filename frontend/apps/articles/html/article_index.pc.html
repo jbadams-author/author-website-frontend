@@ -5,22 +5,22 @@
   </div>
 </div>
 
-<script "text/javascript">
+<script type="text/javascript">
   function parseJSON(jsonObj) {
-    let tableTypes = ["pseudonym","series","palette","article"];
+    let tableTypes;
+    tableTypes = ["pseudonym","series","palette","article"];
     let newMap = new Map();
 
     for (let i=0; i<tableTypes.length; i++) {
       newMap[tableTypes[i]] = [];
-    }
+    };
 
     for (let i=0; i<jsonObj.length; i++) {
-      //alert(jsonObj[i].model.split(".")[1]);
       newMap[jsonObj[i].model.split(".")[1]].push(jsonObj[i]);
-    }
+    };
 
     return newMap;
-  }
+  };
 
   function sortArticlesByDate(articles) {
     function compareDate(a,b) {
