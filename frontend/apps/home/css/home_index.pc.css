@@ -1,5 +1,42 @@
 * {box-sizing:border-box}
 
+.homeSlide {
+  height: 90vh;
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+  background-repeat: no-repeat;
+}
+
+.homeSlideText {
+  text-align: center;
+  vertical-align: middle;
+  background-color: rgba(0,0,0,0.8);
+  font-family: "SpectralRegular";
+  color: white;
+  width: 60%;
+  margin: auto;
+  position: relative;
+  top: 25.0vh;
+  border-style: solid;
+  border-width: 1px;
+  padding: 5px;
+}
+
+.homeLinkDiv {
+  background-color: white;
+  color: black;
+  width: 20%;
+  text-align: center;
+  margin: 5px auto 5px auto;
+  cursor: default;
+}
+
+.newArticle {
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
 /* Slideshow container */
 .slideshow-container {
   max-width: 100%;
@@ -71,7 +108,8 @@
 }
 
 .active, .dot:hover {
-  background-color: #717171;
+  /* background-color: #717171; */
+  background-color: #FFBF00;
 }
 
 /* Fading animation */
