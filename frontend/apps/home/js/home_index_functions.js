@@ -12,8 +12,6 @@ function modifyHomePage(sortedFeatures, articleDict) {
   for (let a=0; a<sortedFeatures.length; a++) {
     let feature = sortedFeatures[a];
     if (feature["fields"]["is_article"]) {
-      alert(articleDict);
-      //alert(Object.keys(articleDict));
       let articleObj = articleDict[feature["fields"]["foreign_reference_number"]];
       let urlString = articleObj["fields"]["url_string"];
       let imgPath = `/static/articles/img/${urlString}.jpg`;
@@ -31,15 +29,17 @@ function modifyHomePage(sortedFeatures, articleDict) {
       divText.classList.add("homeSlideText");
 
       let h2_1 = document.createElement("h2");
-      h2_1.classList.add("newArticle");
+      h2_1.classList.add("featureHeader");
       let t1 = document.createTextNode("New Article");
       h2_1.appendChild(t1);
 
       let h2_2 = document.createElement("h2");
+      h2_2.classList.add("featureTitle");
       let t2 = document.createTextNode(title);
       h2_2.appendChild(t2);
 
       let h2_3 = document.createElement("h4");
+      h2_3.classList.add("featureDescription");
       let t3 = document.createTextNode(description);
       h2_3.appendChild(t3);
 
@@ -62,4 +62,41 @@ function modifyHomePage(sortedFeatures, articleDict) {
 
     }
   }
+
+  let homepageDiv = document.getElementById("homepage");
+  let dotDiv = document.createElement("div");
+  dotDiv.classList.add("dotDiv");
+  dotDiv.id = "dotDiv";
+  for (let a=0; a<sortedFeatures.length; a++) {
+    let dotSpan = document.createElement("span");
+    dotSpan.classList.add("dot");
+    dotSpan.onclick = function() {currentSlide(a+1)};
+    dotDiv.appendChild(dotSpan);
+  }
+  homepageDiv.appendChild(dotDiv);
+}
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
 }
