@@ -1,0 +1,28 @@
+<!-- Slideshow container -->
+<div id="homepage">
+  <div class="slideshow-container" id="slideshow-container">
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+  </div>
+
+  <script>
+    //get and sort
+    let homeJSON = callAndLoadAppJSON('home');
+    let homeFeatures = getModels(homeJSON, "home", "feature");
+    sortModelArrayByDate(homeFeatures, true);
+
+    let articleJSON = callAndLoadAppJSON('articles');
+    let articleArticles = getModels(articleJSON, "articles", "article");
+    let articleDict = getModelDictionary(articleArticles, "reference_number");
+
+    modifyHomePage(homeFeatures, articleDict);
+
+    var slideIndex = 1;
+    showSlides(slideIndex);
+  </script>
+
+  <div class="welcomeDiv">
+    <h3 class="welcomeMessage">The Blood of the World is an upcoming fantasy series by aspiring author Jeremy Bruce Adams. The first novel, "A Warden's Calling," tells the story of Araja, a young man cursed with the inability to wield magic, yet destined to change the world.</h3>
+  </div>
+
+</div>
