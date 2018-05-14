@@ -1,0 +1,39 @@
+div.newsHeader {
+  width: 80%;
+  padding-top: 10.0vh;
+  text-align: center;
+}
+
+h2.newsHeader {
+  font-size: 3.0em;
+  padding-bottom: 5.0vh;
+}
+
+.newsButtons {
+  height:5.0vh;
+  width: 100%;
+}
+
+.newsButtonTable {
+  width:50%;
+}
+
+.newsArticleTD {
+  width:50%;
+  text-align: center;
+}
+
+.newsArticleButton, .newsCalendarButton {
+  height: 5.0vh;
+  text-align: center;
+  margin-left: 1.0vw;
+  margin-right: 1.0vw;
+}
+
+.newsCalendarFrame {
+  width: 100%;
+}
+
+canvas.myCalendar {
+  width: 80%;
+}
