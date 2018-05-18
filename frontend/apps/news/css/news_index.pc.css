@@ -9,6 +9,10 @@ h2.newsHeader {
   padding-bottom: 5.0vh;
 }
 
+h4.newsWelcome {
+  padding-bottom: 5.0vh;
+}
+
 .newsButtons {
   height:5.0vh;
   width: 100%;
@@ -30,10 +34,38 @@ h2.newsHeader {
   margin-right: 1.0vw;
 }
 
+.articlesHeader, .calendarHeader {
+  padding-bottom: 5.0vh;
+}
+
+.calendarExplanation {
+  padding-bottom: 5.0vh;
+}
+
 .newsCalendarFrame {
   width: 100%;
 }
 
-canvas.myCalendar {
+.calendarControlTable {
+  width: 25%;
+}
+
+.canvasContainer {
+  width: 100%;
+}
+
+table.myCalendar {
   width: 80%;
+}
+
+.weekHeaderCell {
+  height: 10.0vh;
+}
+
+.calendarCell {
+  height: 10.0vh;
+}
+
+.blankCell {
+  height: 10.0vh;
 }

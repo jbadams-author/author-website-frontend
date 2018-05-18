@@ -14,8 +14,8 @@ function modifyHomePage(sortedFeatures, articleDict) {
     if (feature["fields"]["is_article"]) {
       let articleObj = articleDict[feature["fields"]["foreign_reference_number"]];
       let urlString = articleObj["fields"]["url_string"];
-      let imgPath = `/static/articles/img/${urlString}.jpg`;
-      let aPath = `/articles/${urlString}`;
+      let imgPath = '/static/articles/img/'+urlString+'.jpg';
+      let aPath = '/articles/'+urlString;
       let title = articleObj["fields"]["title"];
       let description = articleObj["fields"]["description"];
 
@@ -23,7 +23,7 @@ function modifyHomePage(sortedFeatures, articleDict) {
       divSlide.classList.add("homeSlide");
       divSlide.classList.add("mySlides");
       divSlide.classList.add("fade");
-      divSlide.style["background-image"] = `url(${imgPath})`;
+      divSlide.style["background-image"] = 'url('+imgPath+')';
 
       let divText = document.createElement("div");
       divText.classList.add("homeSlideText");

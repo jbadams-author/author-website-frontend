@@ -21,11 +21,11 @@ function callAndLoadAppJSON(appName) {
     }
   };
 
-  xhr.open('GET', `/static/json/${appName}.json`, false);
+  xhr.open('GET', '/static/json/' + appName + '.json', false);
   xhr.send(null);
 
   return returnObj;
-}
+};
 
 /**
 get all django models from a given class and app from a larger JSON object
@@ -39,7 +39,7 @@ returns:
 function getModels(objArr, appName, modelName) {
   retArr = [];
   for (let i=0; i<objArr.length; i++) {
-    if (objArr[i]["model"] == `${appName}.${modelName}`) {
+    if (objArr[i]["model"] == appName+'.'+modelName) {
       retArr.push(objArr[i]);
     }
   }
@@ -91,6 +91,20 @@ function getModelDictionary(modelArr, key_of_interest) {
   for (let i=0; i<modelArr.length; i++) {
     let modelObj = modelArr[i];
     retObj[modelObj["fields"][key_of_interest]] = modelObj;
+  }
+  return retObj;
+}
+
+function getModelDateDictionary(modelArr, key_of_interest) {
+  let retObj = {};
+  for (let i=0; i<modelArr.length; i++) {
+    let modelObj = modelArr[i];
+    let dateObj = new Date(modelObj["fields"][key_of_interest]);
+    newKey = dateObj.getFullYear()+'-'+dateObj.getMonth()+'-'+dateObj.getDate();
+    if (! retObj.hasOwnProperty(newKey)) {
+      retObj[newKey] = [];
+    }
+    retObj[newKey].push(modelObj);
   }
   return retObj;
 }

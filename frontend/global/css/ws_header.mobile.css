@@ -11,6 +11,9 @@ div.ws_header {
 
 div.ws_header_top_row {
   height:8.0vh;
+  margin: 0 auto 0 auto;
+  padding-top: 1.5vh;
+  padding-left: 10.0vw;
 }
 
 img.ws_header {

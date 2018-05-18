@@ -1,0 +1,47 @@
+div.article_banner_image {
+  background-image: url("ARTICLE_VAR_BG_IMAGE");
+  background-size: 100%;
+  background-position: center;
+  height: 40vh;
+  border-width: 0 0 3px 0;
+  border-style: solid;
+}
+
+div.article_frame {
+  position: relative;
+  background-color: #215E21;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.article_body {
+  color: black;
+  background-color: #FFFFF0;
+  text-align: center;
+  border-width: 0 3px 0 3px;
+  border-style: solid;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.article_body_title {
+  margin-bottom: 20px;
+  font-family: 'SpectralRegular';
+}
+
+h1.article_body_title {
+  padding-top: 20px;
+}
+
+hr.article_body_title {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+p {
+  font-family: 'SpectralRegular';
+}

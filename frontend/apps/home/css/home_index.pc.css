@@ -1,5 +1,6 @@
 .homeSlideText {
   width: 75%;
+  top: 25.0vh;
 }
 
 .featureHeader {
@@ -11,7 +12,7 @@
 }
 
 .featureDescription {
-  font-size: 1.0em;
+  font-size: 1.25em;
 }
 
 .homeLinkDiv {
@@ -30,4 +31,8 @@
   width: 1.0em;
   margin-left: 0.5em;
   margin-right: 0.5em;
+}
+
+.welcomeMessage {
+  font-size: 1.25em;
 }

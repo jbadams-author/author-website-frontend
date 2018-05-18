@@ -1,6 +1,10 @@
+<div id="pos" style="position:absolute; display:none;">
+  <div id="closePos" style="color:black;position:absolute;display:none;">close</div>
+</div>
 <div class="newsFrame" id="newsFrame">
   <div class="newsHeader" id="newsHeader">
     <h2 class="newsHeader">News</h2>
+    <h4 class="newsWelcome">Welcome to the news section! Read up on the latest news, and check out upcoming events on the calendar. Be sure to check back here periodically for more updates!</h4>
   </div>
   <div class="newsButtons" id="newsButtons">
     <table class="newsButtonTable">
@@ -12,15 +16,321 @@
   </div>
   <div class="newsSwap" id="newsSwap">
     <div class="newsArticleFrame" id="newsArticleFrame">
-      <h3>Hello Samantha</h3>
+      <h3 class="articlesHeader">Article Listing</h3>
+      <ul class="newsArticleList" id="newsArticleList">
+      </ul>
     </div>
     <div class="newsCalendarFrame" id="newsCalendarFrame">
-      <canvas class="myCalendar" id="myCalendar"></canvas>
+      <h3 class="calendarHeader">Event Calendar</h3>
+      <h4 class="calendarExplanation">Click on dates shaded in gold to view events</h4>
+      <div class="calendarControl">
+        <table class="calendarControlTable">
+          <tr>
+            <td width="10%"><div class="calendarControlButton" id="calendarPrevMonth">&#10094;</div></td>
+            <td width="80%"><h3 id="calendarControlDisplay">display</h3></td>
+            <td width="10%"><div class="calendarControlButton" id="calendarNextMonth">&#10095;</div></td>
+          </tr>
+        </table>
+      </div>
+      <div class="canvasContainer" id="canvasContainer">
+        <table class="myCalendar" id="myCalendar"></table>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
-  modifyNewsPage();
+  //get and sort
+  let newsJSON = callAndLoadAppJSON('news');
+  let newsArticles = getModels(newsJSON, 'news', 'newsarticle');
+  let events = getModels(newsJSON, 'news', 'event');
+
+  sortModelArrayByDate(newsArticles,true);
+  let eventDateDict = getModelDateDictionary(events, "event_date");
+
+  //variables for year
+  let date = new Date();
+  let year = date.getFullYear();
+  let month = date.getMonth();
+
+  function articleButtonClick() {
+    let newsArticleButton = document.getElementById("newsArticleButton");
+    let newsCalendarButton = document.getElementById("newsCalendarButton");
+    let newsArticleFrame = document.getElementById("newsArticleFrame");
+    let newsCalendarFrame = document.getElementById("newsCalendarFrame");
+
+    newsArticleButton.style["background-color"] = "#FFBF00";
+    newsCalendarButton.style["background-color"] = "#FFFFFF";
+    newsArticleFrame.style["display"] = "block";
+    newsCalendarFrame.style["display"] = "none";
+  }
+
+  function calendarButtonClickPrimitive() {
+    let newsArticleButton = document.getElementById("newsArticleButton");
+    let newsCalendarButton = document.getElementById("newsCalendarButton");
+    let newsArticleFrame = document.getElementById("newsArticleFrame");
+    let newsCalendarFrame = document.getElementById("newsCalendarFrame");
+
+    newsArticleButton.style["background-color"] = "#FFFFFF";
+    newsCalendarButton.style["background-color"] = "#FFBF00";
+    newsArticleFrame.style["display"] = "none";
+    newsCalendarFrame.style["display"] = "block";
+  }
+
+  calendarButtonClickPrimitive();
+
+  function calendarButtonClick() {
+    calendarButtonClickPrimitive();
+    drawCalendar();
+  }
+
+  let calendarTable = document.getElementById("myCalendar");
+  //alert(calendarTable.clientWidth);
+  let totalW = calendarTable.clientWidth;
+  let dayW = totalW / 7;
+  let dayH = dayW * 0.6;
+
   articleButtonClick();
+
+  function modifyNewsPage() {
+    //assign function to news article button
+    let newsArticleButton = document.getElementById("newsArticleButton");
+    newsArticleButton.onclick = articleButtonClick;
+    //assign function news calendar button
+    let newsCalendarButton = document.getElementById("newsCalendarButton");
+    newsCalendarButton.onclick = calendarButtonClick;
+
+    //load news article json into the list
+    let newsArticleList = document.getElementById("newsArticleList");
+    for(i=0; i<newsArticles.length; i++) {
+      let title = newsArticles[i]["fields"]["title"];
+      let raw_date = newsArticles[i]["fields"]["pub_date"];
+      let urlString = newsArticles[i]["fields"]["url_string"];
+
+      //create mature date string from raw date
+      let dateObj = new Date(raw_date);
+      let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      let dateString = months[dateObj.getMonth()] + " " + dateObj.getDate() + ", " + dateObj.getFullYear();
+
+      //create and modify DOM elements
+      let li = document.createElement("li");
+      li.classList.add("newsArticleListItem");
+      let span = document.createElement("span");
+      span.classList.add("newsArticleListSpan");
+      let text = document.createTextNode(`${dateString} - ${title}`);
+
+      li.onmouseenter = function() {
+        li.style["color"] = "#FFBF00";
+      };
+      li.onmouseleave = function() {
+        li.style["color"] = "#FFFFFF";
+      };
+      li.onclick = function() {location.href = urlString};
+      li.appendChild(text);
+      newsArticleList.appendChild(li);
+    }
+    //load upcoming event json into the list
+  }
+  modifyNewsPage();
+
+  function checkS(e){
+    // capture the mouse position
+    var posx = 0;
+    var posy = 0;
+    if (!e) var e = window.event;
+    if (e.pageX || e.pageY)
+    {
+      posx = e.pageX;
+      posy = e.pageY;
+    }
+    else if (e.clientX || e.clientY)
+    {
+      posx = e.clientX;
+      posy = e.clientY;
+    }
+    return [posx,posy];
+  }
+
+  function clickCalendarDay(eventsList, mouseEvent) {
+    result = checkS(mouseEvent);
+    posx = result[0];
+    posy = result[1];
+
+    elem = document.getElementById('pos');
+    elem.classList.add("calendarPopup");
+    elem.style.left = (posx * (1.10))+"px";
+    elem.style.top = posy+"px";
+    elem.style.display='block';
+
+    elem.innerHTML = "";
+    for (b=0; b<eventsList.length; b++) {
+      let e = eventsList[b];
+      let txL = ["event_date", "name", "description", "location"];
+
+      for (c=0; c<txL.length; c++) {
+        let tx = e["fields"][txL[c]];
+        let node;
+
+        if (txL[c] == "event_date") {
+          let eventDateObj = new Date(tx);
+          let daysOfWeek = ["Sun","Mon","Tues","Wed","Thurs","Fri","Sat"];
+          let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+          let dateString = `${daysOfWeek[eventDateObj.getDay()]}. ${months[eventDateObj.getMonth()]} ${eventDateObj.getDate()}, ${eventDateObj.getFullYear()}`;
+          node = document.createTextNode(dateString);
+        } else {
+          node = document.createTextNode(tx);
+        }
+
+        elem.appendChild(node);
+        elem.appendChild(document.createElement("br"));
+      }
+    }
+
+    //elem.appendChild(document.createTextNode('Mouse position is: X='+posx+' Y='+posy));
+
+  }
+
+  function enterCalendarDay(nEvents, mouseEvent) {
+    result = checkS(mouseEvent);
+    posx = result[0];
+    posy = result[1];
+
+    elem = document.getElementById('pos');
+    elem.classList.add("calendarPopup");
+    elem.style.left = (posx * (1.10))+"px";
+    elem.style.top = posy+"px";
+    elem.style.display='block';
+
+    elem.innerHTML = "";
+    elem.appendChild(document.createTextNode(`${nEvents} event(s). Click to expand`))
+  }
+
+  function leaveCalendarDay(mouseEvent) {
+    elem=document.getElementById('pos');
+    elem.style.display='none';
+  }
+
+  function drawCalendar() {
+    //first, remove all child nodes of the table object (to prevent re-drawing)
+    while (calendarTable.firstChild) {
+      calendarTable.removeChild(calendarTable.firstChild);
+    }
+
+    // update year month label
+    let calendarControlDisplay = document.getElementById("calendarControlDisplay");
+    let all_months = ["January", "February", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December"];
+    calendarControlDisplay.innerHTML = `${all_months[month]} ${year}`;
+
+    let startDate = new Date(year, month, 01);
+    let startMonth = startDate.getMonth();
+    let day = startDate.getDate();
+
+    //render days of the week header
+    let ypos=dayH * 0.75;
+    let daysOfWeek = ["Sun","Mon","Tues","Wed","Thurs","Fri","Sat"];
+    let daysOfWeekTR = document.createElement("tr");
+    for (i=0; i<daysOfWeek.length;i++) {
+      let dayOfWeekTD = document.createElement("td");
+      dayOfWeekTD.classList.add("weekHeaderCell");
+      let dayText = document.createTextNode(daysOfWeek[i]);
+
+      dayOfWeekTD.appendChild(dayText);
+      daysOfWeekTR.appendChild(dayOfWeekTD);
+    }
+    calendarTable.appendChild(daysOfWeekTR);
+
+    daysOfWeekTR = document.createElement("tr");
+
+    //render the actual days of the calendar
+    //start with blank TDs before the first day
+    firstWeekFillIn = startDate.getDay();
+    for (a=0; a<firstWeekFillIn; a++) {
+      let dayOfWeekTD = document.createElement("td");
+      dayOfWeekTD.classList.add("blankCell");
+      //let dayText = document.createTextNode("BLANK");
+      //dayOfWeekTD.appendChild(dayText);
+      daysOfWeekTR.appendChild(dayOfWeekTD);
+    }
+    calendarTable.appendChild(daysOfWeekTR);
+
+    ypos = dayH;
+    let monthCheck = startMonth;
+
+    while (monthCheck == startMonth) {
+      let newDay = new Date(year,month,day);
+      monthCheck = newDay.getMonth();
+      day += 1;
+
+      // draw elements
+      if (monthCheck == startMonth) {
+        let dayOfWeekTD = document.createElement("td");
+        dayOfWeekTD.classList.add("calendarCell");
+        let dayText = document.createTextNode(newDay.getDate());
+        dayOfWeekTD.appendChild(dayText);
+        daysOfWeekTR.appendChild(dayOfWeekTD);
+
+        //check if event(s) exist
+        let totalEvents = 0;
+        let dayOfWeekEvents = [];
+        eventDateKey = `${newDay.getFullYear()}-${newDay.getMonth()}-${newDay.getDate()}`;
+        if (eventDateDict.hasOwnProperty(eventDateKey)) {
+          totalEvents = eventDateDict[eventDateKey].length;
+          dayOfWeekEvents = eventDateDict[eventDateKey];
+        }
+
+        if (totalEvents > 0) {
+          //dayOfWeekTD.style["background-color"] = "#FFBF00";
+          //dayOfWeekTD.style["opacity"] = "0.4";
+          dayOfWeekTD.style["background-color"] = "rgba(255, 191, 0, 0.4)";
+
+          dayOfWeekTD.addEventListener('click', function(event) {
+            clickCalendarDay(dayOfWeekEvents, event);
+          });
+          dayOfWeekTD.addEventListener('mouseover', function(event) {
+            enterCalendarDay(totalEvents, event);
+          });
+          dayOfWeekTD.addEventListener('mouseout', function(event) {
+            leaveCalendarDay(event);
+          });
+        }
+
+        if (newDay.getDay() == 6) {
+          calendarTable.appendChild(daysOfWeekTR);
+          daysOfWeekTR = document.createElement("tr");
+        }
+      }
+    }
+
+    calendarTable.appendChild(daysOfWeekTR);
+    daysOfWeekTR = document.createElement("tr");
+
+
+  }
+
+  let calendarNextButton = document.getElementById("calendarNextMonth");
+  calendarNextButton.onclick = function() {
+    if (month == 11) {
+      year += 1;
+      month = 0;
+    } else {
+      month += 1;
+    }
+    drawCalendar();
+  }
+
+  let calendarPrevButton = document.getElementById("calendarPrevMonth");
+  calendarPrevButton.onclick = function() {
+    if (month == 0) {
+      year -= 1;
+      month = 11;
+    } else {
+      month -= 1;
+    }
+    drawCalendar();
+  }
+
 </script>

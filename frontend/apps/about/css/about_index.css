@@ -9,7 +9,6 @@
   background-color: transparent;
 }
 
-
 .aboutBackground {
   height: 90.0vh;
   overflow-y: scroll;
@@ -28,9 +27,26 @@
   overflow: auto;
 }
 
+div.portraitAndText {
+  float: left;
+  display: inline-block;
+}
+
+span.aboutPortrait {
+  float: left;
+}
+
 span.aboutText {
   text-indent: 2.0em;
-  padding-bottom: 10.0vh;
+  padding-bottom: 5.0vh;
+  float:right;
+  text-align: center;
+}
+
+p.aboutText {
+  float: right;
+  display: block;
+  text-align: center;
 }
 
 img.aboutPortrait {
