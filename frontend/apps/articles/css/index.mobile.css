@@ -1,0 +1,23 @@
+div.article_index_frame {
+  padding-top: 8.0vh;
+}
+
+div.article_index_body {
+  width: 100%;
+}
+
+.articleIndexTitle {
+  font-size: 5.0em;
+  padding-top: 8.0vh;
+}
+
+.articleIndexExplanation {
+  font-size: 2.5em;
+  padding-top: 5.0vh;
+  padding-bottom: 5.0vh;
+}
+
+.textArticleTitle {
+  font-size: 1.75em;
+  line-height: 1.10em;
+}

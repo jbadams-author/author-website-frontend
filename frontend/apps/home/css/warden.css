@@ -7,10 +7,26 @@ div.ws_footer {
   border-color: #FFBF00;
 }
 
+div.homeSlideText {
+  border-color: #FFBF00;
+}
+
 a.ws_header_sitelinks:hover {
   color: #FFBF00;
 }
 
 a.ws_footer_sitelinks:hover {
   color: #FFBF00;
+}
+
+.homeLinkDiv:hover {
+  background-color: #FFBF00;
+}
+
+.dotDiv {
+  background-color: #215E21;
+}
+
+.welcomeDiv {
+  background-color: #215E21;
 }

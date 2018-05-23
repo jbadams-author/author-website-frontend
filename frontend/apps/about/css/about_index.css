@@ -1,0 +1,54 @@
+::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {
+  height: 30px;
+  display: block;
+  background-color: transparent;
+}
+
+.aboutBackground {
+  height: 90.0vh;
+  overflow-y: scroll;
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(/static/about/img/about-background.jpg)
+}
+
+.aboutMainPanel {
+  text-align: center;
+  margin: 0 auto 0 auto;
+  font-family: "SpectralRegular";
+  color: white;
+  overflow: auto;
+}
+
+div.portraitAndText {
+  float: left;
+  display: inline-block;
+}
+
+span.aboutPortrait {
+  float: left;
+}
+
+span.aboutText {
+  text-indent: 2.0em;
+  padding-bottom: 5.0vh;
+  float:right;
+  text-align: center;
+}
+
+p.aboutText {
+  float: right;
+  display: block;
+  text-align: center;
+}
+
+img.aboutPortrait {
+  width: 100%;
+}

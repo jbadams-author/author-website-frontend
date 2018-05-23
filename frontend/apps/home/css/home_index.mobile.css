@@ -1,0 +1,38 @@
+.homeSlideText {
+  width: 80%;
+  top: 10.0vh;
+}
+
+.featureHeader {
+  font-size: 3.0em;
+}
+
+.featureTitle {
+  font-size: 5.0em;
+}
+
+.featureDescription {
+  font-size: 2.5em;
+}
+
+.homeLinkDiv {
+  margin-top: 2.0vh;
+  margin-bottom: 2.0vh;
+  font-size: 3.0em;
+}
+
+.prev, .next {
+  width: 10%;
+  font-size: 8.0em;
+}
+
+.dot {
+  height: 3.0em;
+  width: 3.0em;
+  margin-left: 2.0em;
+  margin-right: 2.0em;
+}
+
+.welcomeMessage {
+  font-size: 2.5em;
+}

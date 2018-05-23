@@ -2,7 +2,8 @@ div.ws_footer {
   background-color: #4A4A4A;
   width: 100%;
   margin: 0;
-  padding-top: 10px;
+  padding-top: 5.0vh;
+  padding-bottom: 5.0vh;
   position:absolute;
   box-sizing: border-box;
   border-width: 3px 0 0 0;
@@ -15,9 +16,9 @@ div.ws_footer_social_media {
 }
 
 h1.ws_footer_social_media {
-  font-family: "Simplifica";
+  font-family: "Bebas";
   color: white;
-  font-size: 2em;
+  font-size: 1.5em;
   display: inline-block;
   text-align: center;
   padding: 0;

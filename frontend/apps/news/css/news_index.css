@@ -1,0 +1,120 @@
+.newsFrame {
+  /* min-height:90.0vh; */
+  /* overflow-y: scroll; */
+  background-size: cover;
+  background-position: center top;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(/static/news/img/news-background.jpg)
+}
+
+.newsHeader {
+  font-family: "SpectralRegular";
+  color: white;
+  text-align: center;
+  margin: 0 auto 0 auto;
+}
+
+.newsButtons {
+  text-align: center;
+}
+
+.newsButtonTable {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.newsArticleButton, .newsCalendarButton {
+  font-family: "SpectralRegular";
+  color: black;
+  background-color: white;
+  text-align: center;
+}
+
+.newsSwap {
+  width: 100%;
+  color: white;
+  margin-top: 10.0vh;
+}
+
+.newsArticleFrame {
+  /* text-align: center; */
+  /* margin: 0 auto 0 auto; */
+}
+
+.articlesHeader, .calendarHeader {
+  font-family: "SpectralRegular";
+  text-align: center;
+}
+
+.newsArticleList {
+  text-align: center;
+  padding-bottom: 5.0vh;
+}
+
+.newsArticleListItem {
+  font-family: "SpectralRegular";
+  text-decoration: underline;
+}
+
+.newsArticleListSpan {
+  color: black;
+}
+
+.calendarExplanation {
+  font-family: "SpectralRegular";
+  text-align: center;
+}
+
+
+.calendarControlTable {
+  text-align: center;
+  margin: 0 auto 0 auto;
+  font-family: "SpectralRegular";
+}
+
+.calendarControlButton:hover {
+  color: #FFBF00;
+}
+
+.canvasContainer {
+  margin: 0 auto 0 auto;
+}
+
+table.myCalendar {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  table-layout: fixed;
+  padding-bottom: 5.0vh;
+}
+
+.weekHeaderCell {
+  width: 14.28%;
+  border-bottom: 1px solid #FFBF00;
+  font-family: "SpectralRegular";
+}
+
+.calendarCell {
+  width: 14.28%;
+  border: 1px solid #FFBF00;
+  font-family: "SpectralRegular";
+  text-align: left;
+  vertical-align: top;
+  padding-left: 0.5em;
+  padding-top: 0.5em;
+}
+
+.blankCell {
+  width: 14.28%;
+}
+
+.calendarPopup {
+  background-color: #FFFFF0;
+  color: black;
+  z-index: 10;
+  position: absolute;
+  border: 1px solid #FFBF00;
+  padding: 1.0em;
+  font-family: "SpectralRegular"
+}

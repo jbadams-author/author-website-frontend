@@ -1,0 +1,21 @@
+.aboutMainPanel {
+  width: 80%;
+  padding-top: 10.0vh;
+}
+
+.aboutHeader {
+  padding-bottom: 5.0vh;
+  font-size: 3.0em;
+}
+
+span.aboutPortrait {
+  width: 20%;
+}
+
+span.aboutText {
+  width: 80%;
+}
+
+p {
+  font-size: 1.25em;
+}

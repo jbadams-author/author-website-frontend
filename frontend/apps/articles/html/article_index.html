@@ -1,36 +1,15 @@
 <div class="article_index_frame" id="article_index_frame_div">
   <div class="article_index_body" id="article_index_body_div">
+    <div class="articleIndexHeaderFrame">
+      <h2 class="articleIndexTitle">Explore Blessed Astra</h2>
+      <h3 class="articleIndexExplanation">Click a tile to read</h3>
+    </div>
     <table class="article_index_table" id="article_index_table">
     </table>
   </div>
 </div>
 
-<script "text/javascript">
-  function parseJSON(jsonObj) {
-    let tableTypes = ["pseudonym","series","palette","article"];
-    let newMap = new Map();
-
-    for (let i=0; i<tableTypes.length; i++) {
-      newMap[tableTypes[i]] = [];
-    }
-
-    for (let i=0; i<jsonObj.length; i++) {
-      //alert(jsonObj[i].model.split(".")[1]);
-      newMap[jsonObj[i].model.split(".")[1]].push(jsonObj[i]);
-    }
-
-    return newMap;
-  }
-
-  function sortArticlesByDate(articles) {
-    function compareDate(a,b) {
-      if (a.fields.pub_date > b.fields.pub_date) return 1;
-      if (a.fields.pub_date == b.fields.pub_date) return 0;
-      if (a.fields.pub_date < b.fields.pub_date) return -1;
-    }
-    articles.sort(compareDate);
-  }
-
+<script type="text/javascript">
   let xhr = new XMLHttpRequest();
   xhr.open('GET', '/static/json/articles.json');
   xhr.send(null);
@@ -65,33 +44,17 @@
           let aPath = `/articles/${urlstring}`;
 
           let td = document.createElement("td");
-          //let p = document.createElement("p");
           let a = document.createElement("a");
-          let p;
-          let text;
+          let p = document.createElement("p");
+          let p2 = document.createElement("p");
+          let text = document.createTextNode(title);
+          let text2 = document.createTextNode("Click to Read");
           a.setAttribute('href', aPath);
-          //let text = document.createTextNode(`${c} ${title}`);
-          //p.appendChild(text);
-          //p.classList.add("text");
+
           td.classList.add("article_index_td");
-          td.style["background-image"] = `url(${imgPath})`;
-          //td.appendChild(p);
-          //td.appendChild(a);
-          td.onmouseenter = function() {
-            td.style["background-image"] = `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(${imgPath})`;
-            p = document.createElement("p");
-            text = document.createTextNode(title);
-            p.appendChild(text);
-            p.classList.add("text");
-            td.appendChild(p);
+          assignTDStyle(td, imgPath, urlstring, p, p2, text, text2);
+          assignTDEvents(td, imgPath, urlstring, p, p2, text, text2);
 
-          };
-          td.onmouseleave = function() {
-            td.style["background-image"] = `url(${imgPath})`;
-            td.removeChild(p);
-          };
-
-          td.onclick = function() { location.href = urlstring; };
           tr.appendChild(td);
 
           if (cellIdx % cellsPerRow == 0) {

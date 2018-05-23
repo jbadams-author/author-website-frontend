@@ -1,0 +1,82 @@
+div.newsHeader {
+  width: 80%;
+  padding-top: 12.0vh;
+  text-align: center;
+}
+
+h2.newsHeader {
+  font-size: 5.0em;
+  padding-bottom: 5.0vh;
+}
+
+h4.newsWelcome {
+  font-size: 2.0em;
+  padding-bottom: 5.0vh;
+}
+
+.newsButtons {
+  height:5.0vh;
+  width: 100%;
+}
+
+.newsButtonTable {
+  width:90%;
+}
+
+.newsArticleTD {
+  width:50%;
+  text-align: center;
+}
+
+.newsArticleButton, .newsCalendarButton {
+  height: 4.0vh;
+  text-align: center;
+  padding-top: 10%;
+  padding-bottom: 10%;
+  margin-left: 1.0vw;
+  margin-right: 1.0vw;
+  font-size: 2.0em;
+}
+
+.articlesHeader, .calendarHeader {
+  padding-bottom: 5.0vh;
+}
+
+.calendarExplanation {
+  padding-bottom: 5.0vh;
+}
+
+.newsCalendarFrame {
+  width: 100%;
+}
+
+.calendarControlTable {
+  width: 75%;
+  font-size: 3.0em;
+}
+
+.canvasContainer {
+  width: 100%;
+}
+
+table.myCalendar {
+  width: 100%;
+}
+
+.weekHeaderCell {
+  height: 7.5vh;
+  font-size: 2.5em;
+}
+
+.calendarCell {
+  height: 7.5vh;
+  font-size: 2.5em;
+}
+
+.blankCell {
+  height: 7.5vh;
+}
+
+.calendarPopup {
+  font-size: 2.5em;
+}
